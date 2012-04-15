@@ -1,1 +1,1 @@
-alert("JavaScript works!");
+//John Planak Rules
