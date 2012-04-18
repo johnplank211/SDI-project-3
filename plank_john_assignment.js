@@ -4,12 +4,10 @@
 
 
 var terrian      = "urban ";
-var time         = 2400;
+var time         = "2400";
+var baddies      = "Russians ";
 var map          = "Kharg Island ";    
-var friend   	 = "Americans ";
-var foe          = "Russians "
-var annoy        = "hump ";
-//Object 1 
+var friendlies   = "Americans ";
 
 var john = { gamerTag:  "cackmongerr ", 
 			 rank:      "Staff Sargeant ", 
@@ -25,7 +23,10 @@ var john = { gamerTag:  "cackmongerr ",
              },
              makeEveryoneRich: function (flag) {
                 	console.log("Lets go and capture " + flag + "flag and show everyone how rich we are. " )
-             }
+             },
+Spawn: function (user) {
+  user.hitPoints = 300;  
+}
 };
 //object 2
 var brandon = { gamerTag:  "dmusicstud ",
@@ -64,7 +65,7 @@ var nate = { gamerTag:   "eurofreak ",
 };
 
 
-
+//object 4
 var baddies = { gamerTag:  ["Airdemon ", "AfricanAids ", "Pontenail jew "],
 				rank:  	   ["Captain ", "Corporal", "Colonel" ],
 				specialty: ["Support ", "Engineer ", "Assualt ", "Medic"],
@@ -79,13 +80,14 @@ var baddies = { gamerTag:  ["Airdemon ", "AfricanAids ", "Pontenail jew "],
 
 };
 
-
+//object 5
 var vehicile = { tanks: [m1Abrams = {name: 				"M1 m1Abrams",
 									topSpeed:      		"56 KM/H",
 									driverWeapons: 		"main canon and coaxial LMG or HMG",
 									passengerWeapons: 	"heavy machine gun",
 									ammunition: 		"unlimited ",
-									damage: 			100
+									damage: 			100,
+									hitPoints:          0
 									},
 
 
@@ -94,39 +96,58 @@ var vehicile = { tanks: [m1Abrams = {name: 				"M1 m1Abrams",
 									 driverWeapons: 	"main canon and coaxial LMG or HMG",
 									 passengerWeapons: 	"heavy machine gun",
 									 ammunition: 		"unlimited",
-									 damage: 			100
+									 damage: 			100,
+									 hitPoints:         0
 									}		
-						],			
-		 helicpoters: [aH64Apache = {name:      		"Apache ",
+						],		
+			
+ 			 helicpoters: [aH64Apache = {name:      		"Apache ",
 		   							   seats:     		"gunner and  pilot ",
 									   topSpeed: 		"330 KM/H",
         							   standardWeapons: "rockets and Gatling gun",
-		   					    	   damage: 			100
+		   					    	   damage: 			100,
+		   					    	   hitPoints:       0
 		   					    	  }, 
 		   			   Mi28       = {name:              "Mi 28 ",
 		   				 			   seats:           2,
 									   topSpeed:        "320 KM/H ",
                                        standardWeapons: " rockets and Gatling gun ",
-   									   damage: 			100
-   									} 
+   									   damage: 			100,
+   									   hitPoints:       0
+   									}   								
    						],
 
    		   transports:  [growler  = {name:       "Growler ",
  						 			 topSpeed:   "75 KM/H ",
 								     armament:   ".50 cal machine gun ",
    									 seats:       3,
-            						 damage:      50
+            						 damage:      50,
+            						 hitPoints:   0
             						 },
             			 vdvBuggy = {name:        "VDV Buggy ",
             			             topSpeed:    "75 KM/H ",
 									 armament:    ".50 cal machine gun ", 
 									 seats:        3, 
-				           			 damage:  	   50
-				           			 }						 		               
-				        ]
-				 
+				           			 damage:  	   50,
+				           			 hitPoints:    0
+				           			 },				 		               
+				        ],
+				        		moblieDeath: function (x, damage) {
+				        		 /*var shotsFired    = 0,
+				        		 	 damage        = vehicile.damage,
+				        		 	 shotsHit      = 0;*/
+				        		 	 if (x * damage < john.hitPoints)  {
+				        		 	 		console.log("keep shooting he has only ", john.hitPoints - x * damage , "left")
+				        				} else {
+				        					console.log("die bastards ")
+				        				}
+				        		 	 	/*return john.hitPoints - damage;*/
+				        		}
+
+
 };
 
-console.log(vehicile, "\n", john, "\n", nate, "\n", brandon, "\n", baddies);
+john.Spawn(john);
+vehicile.moblieDeath(2, Mi28.damage);
 
 
