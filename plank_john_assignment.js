@@ -8,9 +8,11 @@ var time         = "2400";
 var baddies      = "Russians ";
 var map          = "Kharg Island ";    
 var friendlies   = "Americans ";
+var flags = ["A flag ", "B flag ", "C flag ", "D flag " ];
+var jew = baddies.gamerTag;
 
 var john = { gamerTag:  "cackmongerr ", 
-			 rank:      "Staff Sargeant ", 
+			 rank:      "Staff sergeant ", 
 			 specialty: "Support ",
 			 motto:      "SPOON!!! ",
 			 weapon: { weaponType: "Doa-12 ", maxRange: "50mm ", maxCapacity: "12 rounds ", 
@@ -28,8 +30,8 @@ var john = { gamerTag:  "cackmongerr ",
 };
 //object 2
 var brandon = { gamerTag:  "dmusicstud ",
-				rank:      "Sargeant ",
-				specialty: "Assualt ",
+				rank:      "sergeant ",
+				specialty: "Assault ",
 				motto:      "that faggetty fag bear!! ",
 			    weapon: { weaponType: "F2000 ", maxRange: "500mm ", maxCapacity: "30 rounds ",
 			              firing: "semi, burst, auto ", damage: 25, Sound: "bang bang ", score: 25 },
@@ -64,28 +66,27 @@ var nate = { gamerTag:   "eurofreak ",
 
 };
 
+var tna = [john.gamerTag, brandon.gamerTag, nate.gamerTag];
 
-var tna = [john, brandon, nate];
 
-//object 4
-var baddies = { gamerTag:  ["Airdemon ", "AfricanAids ", "Potenial jew "],
-				rank:  	   ["Captain ", "Corporal", "Colonel" ],
-				specialty: ["Support ", "Engineer ", "Assualt ", "Medic"],
-				weapon:    {weaponType: "G3", maxRange: "350mm ", maxCapacity: "30 rounds ",
-							firing: "semi and auto ", damage: 35, sound: "crack crack ", score: 25 },
+//object Json 4
 
-				hitPoints: 300,
-                score: 0,
-                spreadCommunism: function (flag) {
-                	console.log("Lets go and capture " + flag + "flag and defeat the capitalist pigs. " )
-                },
+function triggerBaddies (x) {
+	console.log("We are the mighty " + x + "clan.");
+};
 
+triggerBaddies(jsonBaddies.clan);
+
+     function spreadCommunism (flag) {
+            console.log("Lets go and capture " + flag + "flag and defeat the capitalist pigs. " )
 };
 
 
-var jew = baddies.gamerTag;
+
+
+
 //object 5
-var vehicile = { tanks: [m1Abrams = {name: 				"M1 m1Abrams",
+var vehicle = { tanks: [m1Abrams = {name: 				"M1 m1Abrams",
 									topSpeed:      		"56 KM/H",
 									driverWeapons: 		"main canon and coaxial LMG or HMG",
 									passengerWeapons: 	"heavy machine gun",
@@ -136,9 +137,9 @@ var vehicile = { tanks: [m1Abrams = {name: 				"M1 m1Abrams",
 				           			 hitPoints:    500
 				           			 },				 		               
 				        ],
-				        		moblieDeath: function (x, damage) {				        		 
-				        		 	 if (x * damage < john.hitPoints)  {
-				        		 	 		console.log("keep shooting he has only ", john.hitPoints - x * damage , "left")
+				        		moblieDeath: function (x, damage, target) {				        		 
+				        		 	 if (x * damage < target)  {
+				        		 	 		console.log("keep shooting he has only ", target - x * damage , "left")
 				        				} else {
 				        					console.log("die bastards ")
 				        				}
@@ -146,37 +147,60 @@ var vehicile = { tanks: [m1Abrams = {name: 				"M1 m1Abrams",
 				        		}
 };
 
-vehicile.moblieDeath(3, vehicile.helicopters[0].damage)
+vehicle.moblieDeath(2, vehicle.helicopters[0].damage, john.hitPoints);
 
-console.log(vehicile.helicopters[0].hitPoints + john.hitPoints);
 
-function Attack(attacker, target, weapon)
-{
-	console.log(attacker.gamerTag + "'s weapon makes a " + weapon.sound + "sound while attacking " + target.gamerTag[0]);
+
+function Attack(attacker, target, weapon) {
+	console.log("John is attacking " + jsonBaddies.gamerTag[0]);
+	console.log(attacker.gamerTag + "'s weapon goes " + weapon.sound + "sound while attacking " + target.gamerTag[0]);
 	target.hitPoints -= weapon.damage;
 }
 
 
-console.log("John is attacking " + baddies.gamerTag[0]);
+
 while (baddies.hitPoints > 0)
 {
 	Attack(john, baddies, john.weapon)
-	console.log("Target now has " + baddies.hitPoints + " hitpoints");
+	console.log("Target now has " + jsonBaddies.hitPoints + " hitPoints");
 		if (baddies.hitPoints === 0 ) {
 			console.log("ha ha ha " + john.motto)
 		}
 };
 
+
 function flagAttack (x) {
-	var flags = ["A flag ", "B flag ", "C flag ", "D flag " ];
+	
 		for (var flagsIndex = 0; flagsIndex < flags.length; flagsIndex++) {
 			console.log("Keep fighting " + x + " we have " + flags[flagsIndex] + " to go!! ")
-}				
-				return "We won TnA style, Coke and pizza for everyone!!"; 
+        }		if (flagsIndex > 0) {
+						console.log("We won TnA style, Coke and pizza for everyone!!") 
+					}
+};
+ 
+flagAttack(tna);
+Attack(john, jsonBaddies, john.weapon);
 
+var flagNames = ["A. Gas station flag ", "B. Office flag ", 
+   				 "C. Construction flag ", "D. Dock flag " ],
+   	minutesPerFlag = [ 30 , 15, 60, 60  ];
+for (var flagNumber = 0; flagNumber < flagNames.length; flagNumber++) {
+	 var flagName = flagNames[flagNumber],
+	 	 minutesThisFlag = minutesPerFlag[flagNumber];
+	 console.log("Start attacking " + flagName + " for "
+	 	+ minutesThisFlag + " minutes ");
+	 for (var minutes = 0; minutes < minutesThisFlag; minutes +=20) {
+	 	var minutesRemain = minutesThisFlag - minutes;
+	 	console.log(minutes + " done, " + minutesRemain + " to go! ");
+		
+	 }
+	 console.log("We finished the " + flagName + ".");
 };
 
-flagAttack(tna);
+var team = {members: "", 
+	clan: function (x) {
+			console.log("We are the mighty \"Tiny Ninja Ants\"" + x + "Clan ")
+	}
+};
 
-
-
+team.clan(tna);
