@@ -167,4 +167,16 @@ while (baddies.hitPoints > 0)
 		}
 };
 
+function flagAttack (x) {
+	var flags = ["A flag ", "B flag ", "C flag ", "D flag " ];
+		for (var flagsIndex = 0; flagsIndex < flags.length; flagsIndex++) {
+			console.log("Keep fighting " + x + " we have " + flags[flagsIndex] + " to go!! ")
+}				
+				return "We won TnA style, Coke and pizza for everyone!!"; 
+
+};
+
+flagAttack(tna);
+
+
 
