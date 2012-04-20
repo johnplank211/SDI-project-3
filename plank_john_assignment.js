@@ -1,7 +1,7 @@
-/// 
+
 // Author John Plank
-// 
-// 
+// SDI project 3
+// A day in Battlefield 3
 // Object 1
 
 var map          = "Caspian Boarder ";    
