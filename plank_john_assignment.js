@@ -6,7 +6,7 @@
 var terrian      = "urban ";
 var time         = "2400";
 var baddies      = "Russians ";
-var map          = "Kharg Island ";    
+var map          = "Caspian Boarder ";    
 var friendlies   = "Americans ";
 var flags = ["A flag ", "B flag ", "C flag ", "D flag " ];
 var jew = baddies.gamerTag;
@@ -20,14 +20,24 @@ var john = { gamerTag:  "cackmongerr ",
                      
                 hitPoints: 300,
                 score: 0,
-     			travelTo: function (map) {
-             	    console.log(nate.gamerTag + "selects " + map + "to joins TnA for some killing ")
+     			promote: function (newRank) {
+             	    this.rank = newRank;
              },
              makeEveryoneRich: function (flag) {
                 	console.log("Lets go and capture " + flag + "flag and show everyone how rich we are. " )
              },
 
+             getRank: function () {
+             		return this.rank;
+             }
 };
+
+
+/*john.travelTo("Krager Island");*/
+john.makeEveryoneRich(flags[2]);
+console.log(john.getRank());
+john.promote("Sergeant First Class");
+
 //object 2
 var brandon = { gamerTag:  "dmusicstud ",
 				rank:      "sergeant ",
@@ -39,13 +49,16 @@ var brandon = { gamerTag:  "dmusicstud ",
                 hitPoints: 300,
                 score: 0,
 				travelTo: function (map) {
-             	    console.log(nate.gamerTag + "selects " + map + "to joins TnA for some killing ")
+             	    console.log(brandon.gamerTag + "selects " + map + "to joins TnA for some killing ")
              },
              	makeEveryoneRich: function (flag) {
                 	console.log("Lets go and capture " + flag + "flag and show everyone how rich we are. " )
              },
 
 };                           
+
+brandon.travelTo("Krager Island");
+brandon.makeEveryoneRich(flags[2]);
 
 // Object 3
 var nate = { gamerTag:   "eurofreak ",
@@ -65,6 +78,9 @@ var nate = { gamerTag:   "eurofreak ",
              },
 
 };
+
+nate.travelTo("Krager Island");
+nate.makeEveryoneRich(flags[2]);
 
 var tna = [john.gamerTag, brandon.gamerTag, nate.gamerTag];
 
