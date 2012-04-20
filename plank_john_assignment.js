@@ -1,7 +1,8 @@
-//John Planak 
-//
-//Just another day "Battlefield 3 style"
-
+/// 
+// Author John Plank
+// 
+// 
+// Object 1
 
 var map          = "Caspian Boarder ";    
 var friendlies   = "Americans ";
@@ -56,12 +57,7 @@ var brandon = { gamerTag:  "dmusicstud ",
                                                       
                 hitPoints: 300,
                 score: 0,
-				travelTo: function (map) {
-             	    console.log(brandon.gamerTag + "selects " + map + "to joins TnA for some killing ")
-             },
-             	makeEveryoneRich: function (flag) {
-                	console.log("Lets go and capture " + flag + "flag and show everyone how rich we are. " )
-             },
+				
              	isAlive: function ( ) {
              		return this.hitPoints > 0;
              	},
@@ -70,8 +66,7 @@ var brandon = { gamerTag:  "dmusicstud ",
              	}
 };                           
 
-brandon.travelTo("Kharg Island");
-brandon.makeEveryoneRich(flags[2]);
+
 console.log(brandon.isAlive());
 console.log(brandon.getWeapon());
 
@@ -85,12 +80,7 @@ var nate = { gamerTag:   "eurofreak ",
              hitPoints: 300,
              score: 0,
 
-             travelTo: function (map) {
-             	    console.log(nate.gamerTag + "selects " + map + "to joins TnA for some killing ")
-             },
-             makeEveryoneRich: function (flag) {
-                	console.log("Lets go and capture " + flag + "flag and show everyone how rich we are. " )
-             },
+             
              currentHitpoints: function () {
              	return this.hitPoints;
              },
@@ -112,8 +102,7 @@ var nate = { gamerTag:   "eurofreak ",
 
 nate.toFightOrDie();
 console.log(nate.currentHitpoints());
-nate.travelTo("Kharg Island");
-nate.makeEveryoneRich(flags[2]);
+
 
 var tna = [john.gamerTag, brandon.gamerTag, nate.gamerTag];
 
@@ -245,14 +234,12 @@ for (var flagNumber = 0; flagNumber < flagNames.length; flagNumber++) {
 
 
 
-var team = {members: "", 
-	clan: function (x) {
-			console.log("We are the mighty \"Tiny Ninja Ants\"" + x + "Clan ")
-	}
-};
+
+
 
 var listCapturedFlags = function () {
 	return capturedFlags;
 };
 
 console.log(listCapturedFlags());
+
