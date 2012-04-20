@@ -3,13 +3,10 @@
 //Just another day "Battlefield 3 style"
 
 
-var terrian      = "urban ";
-var time         = "2400";
-var baddies      = "Russians ";
 var map          = "Caspian Boarder ";    
 var friendlies   = "Americans ";
 var flags = ["A flag ", "B flag ", "C flag ", "D flag " ];
-var jew = baddies.gamerTag;
+
 
 var john = { gamerTag:  "cackmongerr ", 
 			 rank:      "Staff sergeant ", 
@@ -17,10 +14,10 @@ var john = { gamerTag:  "cackmongerr ",
 			 motto:      "SPOON!!! ",
 			 weapon: { weaponType: "Doa-12 ", maxRange: "50mm ", maxCapacity: "12 rounds ", 
 			 		   firing: "semi auto ", damage: 50, sound: "boom boom!! " },
-                     
+                isAwesome:true,     
                 hitPoints: 300,
                 score: 0,
-     			promote: function (newRank) {
+     		 promote: function (newRank) {
              	    this.rank = newRank;
              },
              makeEveryoneRich: function (flag) {
@@ -29,14 +26,25 @@ var john = { gamerTag:  "cackmongerr ",
 
              getRank: function () {
              		return this.rank;
+             },
+             travelTo: function (map) {
+             	    console.log(john.gamerTag + "selects " + map + "to joins TnA for some killing ")
+             },
+             tna: function (x) {
+             	if (x) {
+             		console.log(john.gamerTag + "Is king of the world. ");
+             } else {
+             	console.log("Looks like I'm going to bed early. ")
              }
+         }
+
 };
-
-
-/*john.travelTo("Krager Island");*/
+john.tna(true);
+john.travelTo("Kharg Island");
 john.makeEveryoneRich(flags[2]);
 console.log(john.getRank());
 john.promote("Sergeant First Class");
+console.log(john.getRank());
 
 //object 2
 var brandon = { gamerTag:  "dmusicstud ",
@@ -54,11 +62,18 @@ var brandon = { gamerTag:  "dmusicstud ",
              	makeEveryoneRich: function (flag) {
                 	console.log("Lets go and capture " + flag + "flag and show everyone how rich we are. " )
              },
-
+             	isAlive: function ( ) {
+             		return this.hitPoints > 0;
+             	},
+             	getWeapon: function () {
+             		return this.weapon;
+             	}
 };                           
 
-brandon.travelTo("Krager Island");
+brandon.travelTo("Kharg Island");
 brandon.makeEveryoneRich(flags[2]);
+console.log(brandon.isAlive());
+console.log(brandon.getWeapon());
 
 // Object 3
 var nate = { gamerTag:   "eurofreak ",
@@ -76,10 +91,28 @@ var nate = { gamerTag:   "eurofreak ",
              makeEveryoneRich: function (flag) {
                 	console.log("Lets go and capture " + flag + "flag and show everyone how rich we are. " )
              },
+             currentHitpoints: function () {
+             	return this.hitPoints;
+             },
+             toFightOrDie: function () 
+             {
+	             if (this.hitPoints > 0) 
+	             {
+	             	if (flags.length > 0) 
+	             	{
+	             		console.log("Keep fighting ants!!");
+	            	} 
+	            	else 
+	            	{
+	            		console.log("We just got put under the magnifying glass! ");
+	            	}
+	             }
+           	}
+		};
 
-};
-
-nate.travelTo("Krager Island");
+nate.toFightOrDie();
+console.log(nate.currentHitpoints());
+nate.travelTo("Kharg Island");
 nate.makeEveryoneRich(flags[2]);
 
 var tna = [john.gamerTag, brandon.gamerTag, nate.gamerTag];
@@ -97,8 +130,8 @@ triggerBaddies(jsonBaddies.clan);
             console.log("Lets go and capture " + flag + "flag and defeat the capitalist pigs. " )
 };
 
-
-
+spreadCommunism(flags[2]);
+var jew = jsonBaddies.gamerTag;
 
 
 //object 5
@@ -175,43 +208,42 @@ function Attack(attacker, target, weapon) {
 
 
 
-while (baddies.hitPoints > 0)
+while (jsonBaddies.hitPoints > 0)
 {
-	Attack(john, baddies, john.weapon)
+	Attack(john, jsonBaddies, john.weapon)
 	console.log("Target now has " + jsonBaddies.hitPoints + " hitPoints");
-		if (baddies.hitPoints === 0 ) {
+		if (jsonBaddies.hitPoints === 0 ) {
 			console.log("ha ha ha " + john.motto)
+		} else {
+			console.log("Run for your lives!")
 		}
 };
 
 
-function flagAttack (x) {
-	
-		for (var flagsIndex = 0; flagsIndex < flags.length; flagsIndex++) {
-			console.log("Keep fighting " + x + " we have " + flags[flagsIndex] + " to go!! ")
-        }		if (flagsIndex > 0) {
-						console.log("We won TnA style, Coke and pizza for everyone!!") 
-					}
-};
- 
-flagAttack(tna);
 Attack(john, jsonBaddies, john.weapon);
 
 var flagNames = ["A. Gas station flag ", "B. Office flag ", 
    				 "C. Construction flag ", "D. Dock flag " ],
    	minutesPerFlag = [ 30 , 15, 60, 60  ];
+var capturedFlags = []; 
+var flagCount = 0;
 for (var flagNumber = 0; flagNumber < flagNames.length; flagNumber++) {
 	 var flagName = flagNames[flagNumber],
 	 	 minutesThisFlag = minutesPerFlag[flagNumber];
 	 console.log("Start attacking " + flagName + " for "
 	 	+ minutesThisFlag + " minutes ");
+	   
 	 for (var minutes = 0; minutes < minutesThisFlag; minutes +=20) {
 	 	var minutesRemain = minutesThisFlag - minutes;
 	 	console.log(minutes + " done, " + minutesRemain + " to go! ");
 		
 	 }
 	 console.log("We finished the " + flagName + ".");
+	 capturedFlags[flagCount] = flagName;
+	 flagCount++;
 };
+
+
 
 var team = {members: "", 
 	clan: function (x) {
@@ -219,4 +251,8 @@ var team = {members: "",
 	}
 };
 
-team.clan(tna);
+var listCapturedFlags = function () {
+	return capturedFlags;
+};
+
+console.log(listCapturedFlags());
