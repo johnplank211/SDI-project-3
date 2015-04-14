@@ -51,7 +51,7 @@ console.log(john.getRank());
 var brandon = { gamerTag:  "dmusicstud ",
 				rank:      "sergeant ",
 				specialty: "Assault ",
-				motto:      "that faggetty fag bear!! ",
+				motto:      "that fat bear!! ",
 			    weapon: { weaponType: "F2000 ", maxRange: "500mm ", maxCapacity: "30 rounds ",
 			              firing: "semi, burst, auto ", damage: 25, Sound: "bang bang ", score: 25 },
                                                       
